@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 public class BasicTest {
-public String  authtoken =null;
+    public String authtoken = null;
 
     @Test
-    public void testStatusCode(){
+    public void testStatusCode() {
         given()
                 .get("https://spree-vapasi-prod.herokuapp.com/api/v2/storefront/products")
                 .then()
@@ -24,14 +24,14 @@ public String  authtoken =null;
     }
 
     @Test
-    public void testLogging(){
+    public void testLogging() {
         given()
                 .log().all()
                 .get("https://spree-vapasi-prod.herokuapp.com/api/v2/storefront/products");
     }
 
     @Test
-    public void printResponse(){
+    public void printResponse() {
         Response res = given().when()
                 .log().all()
                 .get("https://spree-vapasi-prod.herokuapp.com/api/v2/storefront/products");
@@ -40,7 +40,7 @@ public String  authtoken =null;
     }
 
     @Test
-    public void testCurrency(){
+    public void testCurrency() {
         given()
                 .get("https://spree-vapasi-prod.herokuapp.com/api/v2/storefront/products")
                 .then()
@@ -66,29 +66,29 @@ public String  authtoken =null;
         }
 
     }
-        @Test
-        public void testFilter()
-        {
-            Response res = given()
-                    .log().all()
-                    .queryParam("filter[name]","bag")
-                    .get("https://spree-vapasi-prod.herokuapp.com/api/v2/storefront/products");
-                    System.out.println(res.prettyPrint());
 
-        }
+    @Test
+    public void testFilter() {
+        Response res = given()
+                .log().all()
+                .queryParam("filter[name]", "bag")
+                .get("https://spree-vapasi-prod.herokuapp.com/api/v2/storefront/products");
+        System.out.println(res.prettyPrint());
 
-        @Test
-        public void testId(){
+    }
+
+    @Test
+    public void testId() {
         Response res = given()
                 .log().all()
                 .queryParam("filter[ids]", "2")
                 .get("https://spree-vapasi-prod.herokuapp.com/api/v2/storefront/products");
-            System.out.println(res.prettyPeek());
+        System.out.println(res.prettyPeek());
 
-        }
+    }
 
     @Test
-    public void testPrice(){
+    public void testPrice() {
         Response res = given()
                 .log().all()
                 .queryParam("filter[price]", "22.99")
@@ -98,7 +98,7 @@ public String  authtoken =null;
     }
 
     @Test
-    public void testTaxons(){
+    public void testTaxons() {
         Response res = given()
                 .log().all()
                 .queryParam("filter[taxons]", "6")
@@ -108,29 +108,29 @@ public String  authtoken =null;
     }
 
     @Test
-    public void testSizeColors(){
+    public void testSizeColors() {
         Response res = given()
                 .log().all()
-                .queryParam("filter[options][tshirt-color]", "S","Blue")
+                .queryParam("filter[options][tshirt-color]", "S", "Blue")
                 .get("https://spree-vapasi-prod.herokuapp.com/api/v2/storefront/products");
         System.out.println(res.prettyPeek());
 
     }
 
     @BeforeClass
-    public void  authToken(){
-        Response res=given()
-                .formParam("grant_type","password")
-                .formParam("username","pitla.sarita@gmail.com")
-                .formParam("password","123456")
+    public void authToken() {
+        Response res = given()
+                .formParam("grant_type", "password")
+                .formParam("username", "pitla.sarita@gmail.com")
+                .formParam("password", "123456")
                 .post("https://spree-vapasi-prod.herokuapp.com/spree_oauth/token");
         System.out.println(res.prettyPrint());
-        authtoken="Bearer " + res.path("access_token");
+        authtoken = "Bearer " + res.path("access_token");
         System.out.println(authtoken);
     }
 
     @Test
-    public void testPostCall(){
+    public void testPostCall() {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
         headers.put("Authorization", authtoken);
@@ -147,7 +147,7 @@ public String  authtoken =null;
     }
 
     @Test
-    public void testPostCall2(){
+    public void testPostCall2() {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
         headers.put("Authorization", authtoken);
@@ -165,7 +165,7 @@ public String  authtoken =null;
 
 
     @Test
-    public void testViewCart(){
+    public void testViewCart() {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
         headers.put("Authorization", authtoken);
@@ -180,7 +180,7 @@ public String  authtoken =null;
     }
 
     @Test
-    public void testDeleteCart(){
+    public void testDeleteCart() {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json");
         headers.put("Authorization", authtoken);
@@ -193,6 +193,7 @@ public String  authtoken =null;
         System.out.println(res.prettyPrint());
 
     }
+
 }
 
 
